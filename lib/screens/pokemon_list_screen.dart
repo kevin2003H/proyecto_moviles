@@ -1,4 +1,5 @@
 // pokemon_list_screen.dart
+
 import 'package:flutter/material.dart';
 import '../service/api.dart';
 import '../models/pokemon.dart';
@@ -12,19 +13,22 @@ class PokemonListScreen extends StatefulWidget {
   _PokemonListScreenState createState() => _PokemonListScreenState();
 }
 
-class _PokemonListScreenState extends State<PokemonListScreen> {
-  late Future<List<Pokemon>> _pokemonListFuture;
-  List<Pokemon> _pokemonList = [];
-  List<Pokemon> _filteredPokemonList = [];
-  final TextEditingController _searchController = TextEditingController();
+class _PokemonListScreenState extends State<PokemonListScreen> { // Define el estado asociado a PokemonListScreen.
+  late Future<List<Pokemon>> _pokemonListFuture; // Variable que almacena el futuro de la lista de Pokémon.
+  List<Pokemon> _pokemonList = [];// Lista completa de Pokémon.
+  List<Pokemon> _filteredPokemonList = [];// Lista filtrada de Pokémon.
+  final TextEditingController _searchController = TextEditingController();// Controlador para el campo de búsqueda.
 
   @override
   void initState() {
     super.initState();
+    // Inicializa el futuro de la lista de Pokémon llamando a fetchPokemonList().
     _pokemonListFuture = fetchPokemonList();
+    // Añade un listener al controlador de búsqueda para filtrar la lista de Pokémon.
     _searchController.addListener(_filterPokemonList);
   }
 
+// Función para filtrar la lista de Pokémon en función del texto de búsqueda.
   void _filterPokemonList() {
     setState(() {
       _filteredPokemonList = _pokemonList.where((pokemon) {
@@ -35,7 +39,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
 
   @override
   void dispose() {
-    _searchController.dispose();
+    _searchController.dispose();// Libera los recursos del controlador de búsqueda cuando se destruye el widget.
     super.dispose();
   }
 
@@ -44,6 +48,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pokémon List'),
+        // Barra de búsqueda en la parte inferior de la AppBar.
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(48.0),
           child: Padding(
@@ -96,6 +101,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
                 Navigator.pop(context);
               },
             ),
+            // Toggle para cambiar entre modo claro y oscuro.
             SwitchListTile(
               title: const Text("Dark Mode"),
               value: themeNotifier.value == ThemeMode.dark,
@@ -111,6 +117,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
         ),
       ),
       body: FutureBuilder<List<Pokemon>>(
+        // Construcción del cuerpo con un FutureBuilder.
         future: _pokemonListFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -122,6 +129,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
             _filteredPokemonList = _pokemonList.where((pokemon) {
               return pokemon.name.toLowerCase().contains(_searchController.text.toLowerCase());
             }).toList();
+            // Muestra la lista de Pokémon.
             return ListView.builder(
               itemCount: _filteredPokemonList.length,
               itemBuilder: (context, index) {
@@ -130,6 +138,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
                   leading: Image.network(pokemon.imageUrl),
                   title: Text(pokemon.name),
                   onTap: () {
+                    // Navega a la pantalla de detalles del Pokémon al hacer clic.
                     Navigator.push(
                       context,
                       MaterialPageRoute(

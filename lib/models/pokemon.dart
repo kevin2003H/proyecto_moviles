@@ -1,5 +1,6 @@
 // lib/models/pokemon.dart
 class Pokemon {
+  // Propiedades finales (inmutables) de la clase Pokemon.
   final String name;
   final String imageUrl;
   final List<String> types;
@@ -8,6 +9,7 @@ class Pokemon {
   final int baseDefense;
   final int baseSpeed;
 
+// Constructor de la clase Pokemon que requiere todos los atributos.
   Pokemon({
     required this.name,
     required this.imageUrl,
@@ -18,6 +20,7 @@ class Pokemon {
     required this.baseSpeed,
   });
 
+ // Fábrica que crea una instancia de Pokemon a partir de un JSON.
   factory Pokemon.fromJson(Map<String, dynamic> json) {
     return Pokemon(
       name: json['name'],

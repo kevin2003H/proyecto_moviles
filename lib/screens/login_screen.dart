@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
-import 'pokemon_list_screen.dart'; // Importa la pantalla principa
+import 'package:flutter/material.dart';// Importa el paquete Flutter para el uso de widgets.
+import 'pokemon_list_screen.dart'; // Importa la pantalla principal
+
+// Define una clase de widget con estado llamada LoginScreen y constructor para la clase LoginScreen.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -8,9 +10,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // Controladores para los campos de texto de email y contraseña.
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+// Función para manejar el inicio de sesión.
   void _login() {
     // Aquí puedes agregar la lógica de autenticación con Firebase u otro backend
     // Simulamos un inicio de sesión exitoso
@@ -21,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  // Construye la interfaz de usuario.
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -36,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
+          // Padding para agregar espacio alrededor del contenido.
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -50,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                // Campo de texto para la contraseña.
                 TextFormField(
                   controller: _passwordController,
                   decoration: const InputDecoration(
@@ -83,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
 void main() {
   runApp(const MyApp());
 }
-
+// ValueNotifier para controlar el modo de tema (claro u oscuro).
 ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 
 class MyApp extends StatelessWidget {
@@ -91,11 +98,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Usamos ValueListenableBuilder para reconstruir MaterialApp cuando cambia el modo de tema.
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
           title: 'Pokémon App',
+          // Tema claro de la aplicación.
           theme: ThemeData(
             primarySwatch: Colors.brown,
             brightness: Brightness.light,
@@ -108,6 +117,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: Color(0xFFF5F5F5), // Beige claro
             ),
           ),
+           // Tema oscuro de la aplicación.
           darkTheme: ThemeData(
             primarySwatch: Colors.grey,
             brightness: Brightness.dark,

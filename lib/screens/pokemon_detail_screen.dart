@@ -1,19 +1,22 @@
 // lib/screens/pokemon_detail_screen.dart
-import 'package:flutter/material.dart';
+
+import 'package:flutter/material.dart';//importa para el uso de los widgets
 import '../models/pokemon.dart';
 
-class PokemonDetailScreen extends StatelessWidget {
-  final Pokemon pokemon;
+class PokemonDetailScreen extends StatelessWidget { // Define una pantalla de detalles de Pokémon que extiende StatelessWidget.
+  final Pokemon pokemon;// Propiedad final para el Pokémon cuyos detalles se mostrarán.
 
+// Constructor que recibe un Pokémon y una clave opcional.
   const PokemonDetailScreen({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(pokemon.name),
+        title: Text(pokemon.name),// Muestra el nombre del Pokémon en la barra de aplicaciones.
       ),
       body: Padding(
+        // Añade un padding alrededor del contenido.
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
