@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
           title: 'Pokémon App',
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(// Tema claro de la aplicación.
             primarySwatch: Colors.brown,
             brightness: Brightness.light,
